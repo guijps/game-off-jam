@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://chd10urm47xgc"]
+
+[ext_resource type="Script" uid="uid://bggqwvpyhrgc6" path="res://Scripts/GameManager.cs" id="1_fivd0"]
+[ext_resource type="Texture2D" uid="uid://bokecm5kq5x0l" path="res://Graphs/Player/phPlayer.png" id="1_fqyld"]
+[ext_resource type="PackedScene" uid="uid://bc45o2salaeme" path="res://Scenes/Player/player.tscn" id="2_5olm8"]
+[ext_resource type="Script" uid="uid://dgoyplh6x4fwu" path="res://Scripts/MobSpawn.cs" id="3_x41n4"]
+[ext_resource type="PackedScene" uid="uid://10p3ugpds6lt" path="res://Scenes/GUI.tscn" id="6_p1svk"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hit2j"]
+vertices = PackedVector2Array(593.1094, 343.53125, 12.796875, 343.53125, 12.796875, 24.960938, 593.1094, 24.960938)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(619, -2, 623, 359, -1, 355, -1, -8)])
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bhy4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5olm8"]
+size = Vector2(3.663993, 144.38046)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhy4p"]
+size = Vector2(703, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7fec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqso8"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_fivd0")
+
+[node name="GUI" parent="." node_paths=PackedStringArray("gameManager") instance=ExtResource("6_p1svk")]
+scale = Vector2(1.001374, 0.98446906)
+gameManager = NodePath("..")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-160, 254)
+scale = Vector2(0.98669297, 0.9864528)
+navigation_polygon = SubResource("NavigationPolygon_hit2j")
+
+[node name="walls" type="Node2D" parent="NavigationRegion2D"]
+script = ExtResource("3_x41n4")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(-2.0269718, 175.37585)
+scale = Vector2(2.5030937, -3.0682812)
+collision_layer = 8
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_bhy4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D"]
+position = Vector2(0.096420765, 0)
+scale = Vector2(1, 1.0000007)
+shape = SubResource("RectangleShape2D_5olm8")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D"]
+scale = Vector2(-0.23874062, 8.954944)
+texture = ExtResource("1_fqyld")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(306.07294, 12.164806)
+scale = Vector2(1, 0.31066263)
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D2"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_bhy4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D2/CollisionShape2D"]
+scale = Vector2(40.24126, 1.5549426)
+texture = ExtResource("1_fqyld")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(312.15384, 355.82037)
+scale = Vector2(1, 0.107914746)
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D3"]
+scale = Vector2(34.960003, 2.1200013)
+shape = SubResource("RectangleShape2D_y7fec")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D3"]
+rotation = 3.1415927
+scale = Vector2(46.22637, -2.6244907)
+texture = ExtResource("1_fqyld")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(608.09186, 178.41705)
+scale = Vector2(0.18921077, 1)
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D4"]
+scale = Vector2(2.6333413, 19.801664)
+shape = SubResource("RectangleShape2D_jqso8")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D4"]
+scale = Vector2(3.3612568, 23.514942)
+texture = ExtResource("1_fqyld")
+
+[node name="Player" parent="NavigationRegion2D" node_paths=PackedStringArray("gameManager") instance=ExtResource("2_5olm8")]
+position = Vector2(520.9321, 66.90639)
+collision_layer = 1
+collision_mask = 10
+MoveSpeed = 200.0
+Experience = 100
+gameManager = NodePath("../..")
+
+[node name="Camera2D" type="Camera2D" parent="NavigationRegion2D/Player"]
+zoom = Vector2(0.65, 0.65)
+position_smoothing_enabled = true

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc45o2salaeme"]
+
+[ext_resource type="Texture2D" uid="uid://bokecm5kq5x0l" path="res://Graphs/Player/phPlayer.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://chxjrqmb02boe" path="res://Scripts/Player/Player.cs" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://bdfaism4ap70e" path="res://Graphs/Player/MoonLight.png" id="2_fkybt"]
+[ext_resource type="Script" uid="uid://cddst00c0lvba" path="res://Scripts/Items/PlayerGun.cs" id="3_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://dhy5thnlnshrh" path="res://Scenes/Projectiles/player_shot.tscn" id="4_vgqql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
+size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3wgy"]
+size = Vector2(20, 26)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon", "LifeLabel") groups=["Players"]]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_onrkg")
+weapon = NodePath("Aim")
+LifeLabel = NodePath("Label")
+Dexterity = 5.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_fkybt")
+
+[node name="AreaToColide" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaToColide"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_fkybt")
+
+[node name="Aim" type="Node2D" parent="."]
+visibility_layer = 16
+position = Vector2(0, -7)
+script = ExtResource("3_6t5aa")
+WeaponProjectileScene = ExtResource("4_vgqql")
+
+[node name="Sprite2D" type="Sprite2D" parent="Aim"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_4flbx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -8.0
+offset_top = -19.0
+offset_right = 32.0
+offset_bottom = 4.0
+scale = Vector2(0.44000036, 0.40000033)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_x3wgy")
+
+[connection signal="area_entered" from="AreaToColide" to="." method="OnBodyEntered"]
+[connection signal="body_entered" from="AreaToColide" to="." method="OnBodyEntered"]

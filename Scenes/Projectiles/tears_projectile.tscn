@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8ne05s005sf"]
+
+[ext_resource type="PackedScene" uid="uid://cdrxro46g21n0" path="res://Scenes/Projectiles/basic-projectile.tscn" id="1_ij652"]
+[ext_resource type="Texture2D" uid="uid://c0nxnuh3liflh" path="res://Graphs/Projectiles/phEnemyProjectile.png" id="2_cmrb1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b8b3"]
+size = Vector2(31, 20)
+
+[node name="tearsProjectile" instance=ExtResource("1_ij652")]
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_cmrb1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_2b8b3")

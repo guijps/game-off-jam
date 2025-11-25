@@ -1,0 +1,132 @@
+[gd_scene load_steps=2 format=3 uid="uid://10p3ugpds6lt"]
+
+[ext_resource type="Script" uid="uid://baj8t6l43j60t" path="res://Scripts/Gui.cs" id="1_bpa6r"]
+
+[node name="GUI" type="Control" node_paths=PackedStringArray("GameOverLabel", "ExperienceLabel", "HealthLabel", "StatusLabel", "MissionLabel", "LevelUpQtyLabel", "LevelUpPanel", "WaveLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bpa6r")
+GameOverLabel = NodePath("CanvasLayer2/GameOverView")
+ExperienceLabel = NodePath("CanvasLayer2/Experince")
+HealthLabel = NodePath("CanvasLayer2/PlayerHealthLabel")
+StatusLabel = NodePath("CanvasLayer2/Stats Label")
+MissionLabel = NodePath("CanvasLayer2/Mission")
+LevelUpQtyLabel = NodePath("CanvasLayer2/LevelUpButton/QtyLevelUp")
+LevelUpPanel = NodePath("CanvasLayer2/LevelUpButton")
+WaveLabel = NodePath("CanvasLayer2/Wave Sign")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Stats Label" type="Label" parent="CanvasLayer2"]
+offset_left = 4.0
+offset_top = 53.0
+offset_right = 58.0
+offset_bottom = 128.0
+text = "DEX:  X
+ATT: Y
+SPD:Z"
+
+[node name="PlayerHealthLabel" type="Label" parent="CanvasLayer2"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Player HP "
+
+[node name="Mission" type="Label" parent="CanvasLayer2"]
+offset_left = 253.0
+offset_top = 1.0
+offset_right = 508.0
+offset_bottom = 50.0
+text = "You can't hit the boss while 
+there are minions alive !"
+
+[node name="Experince" type="Label" parent="CanvasLayer2"]
+offset_left = -1.0
+offset_top = 29.0
+offset_right = 84.0
+offset_bottom = 52.0
+text = "Experience:"
+
+[node name="GameOverView" type="Panel" parent="CanvasLayer2"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(12.071667, 6.9294324)
+
+[node name="Label" type="Label" parent="CanvasLayer2/GameOverView"]
+layout_mode = 0
+offset_left = 11.514565
+offset_top = 16.307253
+offset_right = 98.514565
+offset_bottom = 39.30725
+scale = Vector2(0.18553327, 0.26689523)
+text = "Game Over"
+
+[node name="Button" type="Button" parent="CanvasLayer2/GameOverView"]
+layout_mode = 0
+offset_left = 11.597404
+offset_top = 23.522852
+offset_right = 92.597404
+offset_bottom = 54.522854
+scale = Vector2(0.21494293, 0.21494293)
+text = "Try Again"
+
+[node name="LevelUpButton" type="Panel" parent="CanvasLayer2"]
+offset_left = 7.0
+offset_top = 133.0
+offset_right = 192.0
+offset_bottom = 223.0
+scale = Vector2(0.59999967, 0.59999967)
+
+[node name="Button" type="Button" parent="CanvasLayer2/LevelUpButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.024
+anchor_bottom = 0.024
+offset_left = 7.365517
+offset_top = 9.285792
+offset_right = 182.36552
+offset_bottom = 31.285791
+theme_override_font_sizes/font_size = 10
+text = "Press 1 to Increase Attack Damage"
+
+[node name="Button2" type="Button" parent="CanvasLayer2/LevelUpButton"]
+layout_mode = 0
+offset_left = 7.365517
+offset_top = 33.534485
+offset_right = 172.36552
+offset_bottom = 55.534485
+theme_override_font_sizes/font_size = 10
+text = "Press 2 to Increase Attack Speed"
+
+[node name="Button3" type="Button" parent="CanvasLayer2/LevelUpButton"]
+layout_mode = 0
+offset_left = 5.6793103
+offset_top = 55.45517
+offset_right = 165.6793
+offset_bottom = 77.45517
+theme_override_font_sizes/font_size = 10
+text = "Press 3 to increase Move Speed
+"
+
+[node name="QtyLevelUp" type="Label" parent="CanvasLayer2/LevelUpButton"]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 31.0
+offset_right = 361.0
+offset_bottom = 54.0
+
+[node name="Wave Sign" type="Label" parent="CanvasLayer2"]
+offset_left = 134.0
+offset_top = 103.99999
+offset_right = 281.49188
+offset_bottom = 126.99999
+scale = Vector2(1.0780255, 1.662475)
+
+[connection signal="button_down" from="CanvasLayer2/GameOverView/Button" to="." method="OnTryAgainPressed"]
+[connection signal="button_down" from="CanvasLayer2/LevelUpButton/Button" to="." method="LevelUpChoice" binds= [2]]
+[connection signal="button_down" from="CanvasLayer2/LevelUpButton/Button2" to="." method="LevelUpChoice" binds= [0]]
+[connection signal="button_down" from="CanvasLayer2/LevelUpButton/Button3" to="." method="LevelUpChoice" binds= [4]]

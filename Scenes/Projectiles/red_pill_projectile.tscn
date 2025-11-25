@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmhdnbqx8l0tk"]
+
+[ext_resource type="Script" uid="uid://dv7j3amsoy6hk" path="res://Scripts/Projectiles/Projectile.cs" id="1_rrvqv"]
+[ext_resource type="Texture2D" uid="uid://cbddomtv11qjq" path="res://Graphs/Enemies/red-cry-baby.png" id="2_k1tsd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2v4yl"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_380oc"]
+atlas = ExtResource("2_k1tsd")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2v4yl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_380oc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+scale = Vector2(0.7, 0.7)
+collision_layer = 2
+script = ExtResource("1_rrvqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_2v4yl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2v4yl")

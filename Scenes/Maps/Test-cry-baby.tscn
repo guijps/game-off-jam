@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx1320lfk7de2"]
+
+[ext_resource type="Texture2D" uid="uid://bokecm5kq5x0l" path="res://Graphs/Player/phPlayer.png" id="1_ayyed"]
+[ext_resource type="PackedScene" uid="uid://bc45o2salaeme" path="res://Scenes/Player/player.tscn" id="2_e0imt"]
+[ext_resource type="PackedScene" uid="uid://vxxdjixgi17h" path="res://Scenes/Enemy/enemy_cry_baby.tscn" id="4_nk0oc"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hit2j"]
+vertices = PackedVector2Array(606.65625, 341.79688, 12, 341.79688, 12, 10, 606.65625, 10)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(619, -2, 623, 359, -1, 355, -1, -8)])
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bhy4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5olm8"]
+size = Vector2(3.663993, 144.38046)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhy4p"]
+size = Vector2(703, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7fec"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqso8"]
+
+[node name="main" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-160, 254)
+navigation_polygon = SubResource("NavigationPolygon_hit2j")
+
+[node name="walls" type="Node2D" parent="NavigationRegion2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(-23, 177)
+scale = Vector2(15.556799, -3.0682812)
+collision_layer = 8
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_bhy4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D"]
+position = Vector2(0.096420765, 0)
+scale = Vector2(1, 1.0000007)
+shape = SubResource("RectangleShape2D_5olm8")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D"]
+scale = Vector2(-0.23874062, 8.954944)
+texture = ExtResource("1_ayyed")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(303, -9)
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D2"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_bhy4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D2/CollisionShape2D"]
+scale = Vector2(40.24126, 1.5549426)
+texture = ExtResource("1_ayyed")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(310, 373)
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D3"]
+scale = Vector2(34.960003, 2.1200013)
+shape = SubResource("RectangleShape2D_y7fec")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D3"]
+rotation = 3.1415927
+scale = Vector2(46.22637, -2.6244907)
+texture = ExtResource("1_ayyed")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(643, 176)
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D4"]
+scale = Vector2(2.6333413, 19.801664)
+shape = SubResource("RectangleShape2D_jqso8")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D4"]
+scale = Vector2(3.3612568, 23.514942)
+texture = ExtResource("1_ayyed")
+
+[node name="Player" parent="NavigationRegion2D" instance=ExtResource("2_e0imt")]
+position = Vector2(222, 54)
+collision_layer = 1
+collision_mask = 10
+
+[node name="Camera2D" type="Camera2D" parent="NavigationRegion2D/Player"]
+scale = Vector2(5.0982323, 4.7943573)
+zoom = Vector2(0.3, 0.3)
+position_smoothing_enabled = true
+
+[node name="CryBaby" parent="." instance=ExtResource("4_nk0oc")]
+position = Vector2(218, 358)

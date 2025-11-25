@@ -1,0 +1,116 @@
+[gd_scene load_steps=15 format=3 uid="uid://dk4qoksaw66r1"]
+
+[ext_resource type="Texture2D" uid="uid://bufkkwj356qpt" path="res://Graphs/Enemies/enemy-rich-guy.png" id="1_8ihtv"]
+[ext_resource type="Script" uid="uid://d2pleqvpjeflu" path="res://Scripts/Enemy/BaseFollowShootingEnemy.cs" id="1_g6gif"]
+[ext_resource type="Script" uid="uid://db2ak6urhwgtm" path="res://Scripts/Items/ProjectilePlayerShooter.cs" id="2_eejkc"]
+[ext_resource type="PackedScene" uid="uid://8bhrcou03srg" path="res://Scenes/Projectiles/coin_projectile.tscn" id="3_0fka1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eejkc"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(0, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fka1"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(64, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6gif"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(128, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1m25"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(192, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmk1j"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(256, 0, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcq4j"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(0, 70, 64, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xh5bl"]
+atlas = ExtResource("1_8ihtv")
+region = Rect2(64, 70, 64, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y0y3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eejkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fka1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6gif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1m25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmk1j")
+}],
+"loop": true,
+"name": &"atack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcq4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xh5bl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eejkc"]
+size = Vector2(22, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6gif"]
+size = Vector2(29.491894, 50.310005)
+
+[node name="RichGuy" type="CharacterBody2D" node_paths=PackedStringArray("LifeLabel", "weapon")]
+scale = Vector2(0.40829837, 0.40829837)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_g6gif")
+LifeLabel = NodePath("Label")
+weapon = NodePath("Gun")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y0y3l")
+frame_progress = 0.2665557
+
+[node name="Gun" type="Node2D" parent="."]
+position = Vector2(19.593521, 4.898379)
+scale = Vector2(0.752227, 0.752227)
+script = ExtResource("2_eejkc")
+WeaponProjectileScene = ExtResource("3_0fka1")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -43.0
+offset_right = 21.0
+offset_bottom = -20.0
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, 10)
+shape = SubResource("RectangleShape2D_eejkc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.3983796, 9.133651)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_g6gif")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnBodyEntered"]
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

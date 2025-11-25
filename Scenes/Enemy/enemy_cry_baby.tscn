@@ -1,0 +1,172 @@
+[gd_scene load_steps=22 format=3 uid="uid://vxxdjixgi17h"]
+
+[ext_resource type="Script" uid="uid://b5a0q2n42nl48" path="res://Scripts/Enemy/BaseMoveSplashEnemy.cs" id="1_8oj23"]
+[ext_resource type="Texture2D" uid="uid://cbddomtv11qjq" path="res://Graphs/Enemies/red-cry-baby.png" id="1_rr50t"]
+[ext_resource type="Script" uid="uid://dxvdcvxx3yyle" path="res://Scripts/Enemy/MultiCircularWeapon.cs" id="3_aqsm0"]
+[ext_resource type="PackedScene" uid="uid://dmhdnbqx8l0tk" path="res://Scenes/Projectiles/red_pill_projectile.tscn" id="4_h8w0y"]
+[ext_resource type="Script" uid="uid://bltdppcccce10" path="res://Scripts/Projectiles/EnemyBaseProjectile.cs" id="5_8oj23"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hser"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sc4g"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcj0h"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ukbf"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysf1n"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp2x7"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twqov"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vesvj"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuux8"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxa8v"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxy0w"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r5cl"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp77s"]
+atlas = ExtResource("1_rr50t")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6y8ey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hser")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sc4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcj0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ukbf")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysf1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp2x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twqov")
+}],
+"loop": true,
+"name": &"damage",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vesvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuux8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxa8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxy0w")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r5cl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp77s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8w0y"]
+size = Vector2(25, 52.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oj23"]
+size = Vector2(35.95614, 66.91228)
+
+[node name="CryBaby" type="CharacterBody2D" node_paths=PackedStringArray("LifeLabel", "weapon")]
+scale = Vector2(0.50070846, 0.50070846)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_8oj23")
+LifeLabel = NodePath("Label")
+weapon = NodePath("MultiCircularWeapon")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6y8ey")
+animation = &"attack"
+
+[node name="MultiCircularWeapon" type="Node2D" parent="."]
+position = Vector2(1, 0)
+script = ExtResource("3_aqsm0")
+WeaponProjectileScene = ExtResource("4_h8w0y")
+WeaponProjectileScript = ExtResource("5_8oj23")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -21.968872
+offset_top = -51.926422
+offset_right = 18.031128
+offset_bottom = -28.926422
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.5, 4.25)
+shape = SubResource("RectangleShape2D_h8w0y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0, 5.496)
+shape = SubResource("RectangleShape2D_8oj23")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnBodyEntered"]
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
