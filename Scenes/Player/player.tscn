@@ -19,11 +19,13 @@ script = ExtResource("1_onrkg")
 weapon = NodePath("Aim")
 LifeLabel = NodePath("Label")
 Dexterity = 5.0
+Attack = 20.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture = ExtResource("2_fkybt")
 
 [node name="AreaToColide" type="Area2D" parent="."]
+disable_mode = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaToColide"]

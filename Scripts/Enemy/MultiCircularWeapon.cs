@@ -47,7 +47,7 @@ public partial class MultiCircularWeapon : Weapon
 			float x = Radius * Mathf.Cos(angleInRadians);
 			float y = Radius * Mathf.Sin(angleInRadians);
 			weaponPoints[i].Position = new Vector2(x, y);
-			GD.Print("Weapon Point " + i + " Position: " + weaponPoints[i].Position);
+			//GD.Print("Weapon Point " + i + " Position: " + weaponPoints[i].Position);
 		}
 		
     }

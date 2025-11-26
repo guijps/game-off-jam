@@ -24,7 +24,7 @@ public abstract partial class Enemy : CharacterBody2D
 	[Export]protected  float ProjectileLifetime = 3f;
 	#endregion
 
-	[Export] protected int ExperienceOnDeath = 100;
+	[Export] protected int ExperienceOnDeath = 20;
 
 	public override void _Ready()
     { 	
@@ -77,7 +77,7 @@ public abstract partial class Enemy : CharacterBody2D
 			if(!projectile.IsFriendly)
 				return;
 			
-			GD.Print("Enemy Hit by Projectile Damage:" + projectile.Damage);
+			//GD.Print("Enemy Hit by Projectile Damage:" + projectile.Damage);
             if (Stats.TakeDamage(projectile.Damage))
             {
 				LifeLabel.Text = "HP: " + Stats.CurrentHealth;

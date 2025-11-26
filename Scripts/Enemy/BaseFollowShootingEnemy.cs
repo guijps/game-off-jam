@@ -10,11 +10,11 @@ public partial class BaseFollowShootingEnemy : Enemy
 		base._Ready();
 		CurrentState = EnemyState.Move | EnemyState.Attack;
 		Target = GetTree().GetNodesInGroup("Players")[0] as CharacterBody2D ?? null;
-		GD.Print("Enemy Target: " + Target.Name);
+		//GD.Print("Enemy Target: " + Target.Name);
     }
 	public override void SetStats()
     {
-		Stats = new StatsComponent(50,100f,2,0f,5f);
+		Stats = new StatsComponent(20,100f,2,0f,5f);
 		ProjectileStats = new ProjectileStatsComponent(Stats.CurrentAttack,150f,Stats.CurrentAttack);
     }
 	

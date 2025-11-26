@@ -12,10 +12,12 @@ public partial class MobSpawn : Node2D
 	[Export] public PackedScene CryBabyScene;
 	[Export] public PackedScene RichGuyScene;
 	[Export] public PackedScene GhostScene;
+	[Export] public int LastWave = 10;
 	public int EnemiesToKill
 	{
 		get;set;
 	}
+	private readonly object _lock = new object();
 	public override void _Ready()
 	{
 		wave =1;
@@ -29,8 +31,8 @@ public partial class MobSpawn : Node2D
 	public void SpawnWave()
 
 	{
-		spawnedMobsCount[EnemyType.CryBaby] = wave * 2;
-		spawnedMobsCount[EnemyType.RichGuy] = wave;
+		spawnedMobsCount[EnemyType.CryBaby] = wave ;
+		spawnedMobsCount[EnemyType.RichGuy] = wave* 2;
 		//spawnedMobsCount[EnemyType.Ghost] = wave / 2;
 		EnemiesToKill= wave * 3;
 		foreach(var mobEntry in spawnedMobsCount)
@@ -63,29 +65,44 @@ public partial class MobSpawn : Node2D
 			return;
 		}
 		var mobInstance = sceneToSpawn.Instantiate<Enemy>();
-		double x = GD.RandRange(0, GetViewportRect().Size.X);
-		double y = GD.RandRange(0, GetViewportRect().Size.Y);
+		double x = GD.RandRange(20, 580);
+		double y = GD.RandRange(20,280);
 		Vector2 spawnPosition = new Vector2(
 			(float)x,
 			(float)y
 		);
 		mobInstance.Position = spawnPosition;
-		GD.Print("Spawned " + type + " at " + spawnPosition);
+		//GD.Print("Spawned " + type + " at " + spawnPosition);
 		AddChild(mobInstance);
 	}
 	public async Task UpdateMissionOnDeath(int type)
 	{
-		if(EnemiesToKill <= 0)
+		lock (_lock)
+		{
+			if(EnemiesToKill <= 0)
 			return;
-		EnemiesToKill--;
-		GD.Print("Enemies left to kill: " + EnemiesToKill);
+			EnemiesToKill--;
+		}
+		//GD.Print("Enemies left to kill: " + EnemiesToKill);
 		gameManager.MissionUpdateEvent?.Invoke("Enemies left to kill: " + EnemiesToKill);
 		if(EnemiesToKill <= 0)
 		{
-			GD.Print("Wave cleared! Spawning next wave...");
-			gameManager.StartWaveNoticeEvent?.Invoke(wave);
-			await ToSignal(GetTree().CreateTimer(3.0f), "timeout");
-			SpawnWave();
-		}
+			await FinishWave();
+		}	
 	}
+	private async Task FinishWave()
+	{
+		if(wave==LastWave +1)
+		{
+			//GD.Print("All waves completed! You win!");
+			gameManager.FinishLastWave?.Invoke();
+
+		}
+		//GD.Print("Wave cleared! Spawning next wave...");
+		gameManager.StartWaveNoticeEvent?.Invoke(wave);
+		await ToSignal(GetTree().CreateTimer(3.0f), "timeout");
+		SpawnWave();
+	}
+		
+	
 }

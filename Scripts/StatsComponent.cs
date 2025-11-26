@@ -62,15 +62,15 @@ public class StatsComponent
         Heal(10);
 		switch(status){
 			case UpdateStatus.Attack:
-				this.BaseAttack += 1;
+				this.BaseAttack += 0.2f;
 				break;
 			case UpdateStatus.Dexterity:
-				this.BaseDexterity += 0.05f;
+				this.BaseDexterity += 0.1f;
 				break;
 			case UpdateStatus.Speed:
 				this.BaseSpeed += this.BaseSpeed * 0.05f;
 				break;
 		}
-        GD.Print("Entity leveled up!");
+        //GD.Print("Entity leveled up!");
     }
 }

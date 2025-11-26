@@ -19,7 +19,7 @@ public partial class PlayerGun : TargetedWeapon
 	{
 		Vector2 position = GetParent<Node2D>().GlobalPosition;
 		Vector2 direction = (GetTargetPosition() - position).Normalized();
-		GlobalPosition = position +30*direction;
+		GlobalPosition = position +1*direction;
 	}
 
 		

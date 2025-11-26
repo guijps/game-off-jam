@@ -40,7 +40,7 @@ public partial class Projectile : Area2D
 
     protected void OnBodyEntered(Node body)
     {
-        GD.Print("Projectile hit: " + body.Name);
+        //GD.Print("Projectile hit: " + body.Name);
         HandleHit(body);
     }
 

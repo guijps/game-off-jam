@@ -26,11 +26,11 @@ public partial class TargetedWeapon : Weapon
 		bullet.GlobalPosition = GlobalPosition;  // Spawn at player's position
 		if(GetTree().CurrentScene != null)
         {
-            GD.Print("Current Scene: " + root.Name);
+            //GD.Print("Current Scene: " + root.Name);
             root.AddChild(bullet);
             return;
         }
-          GD.Print("GetParent Scene: " +  GetParent().Name);
+          //GD.Print("GetParent Scene: " +  GetParent().Name);
         GetParent().AddChild(bullet);
         
     }

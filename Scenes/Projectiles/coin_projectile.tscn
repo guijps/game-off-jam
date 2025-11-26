@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://8bhrcou03srg"]
 
-[ext_resource type="Script" uid="uid://dv7j3amsoy6hk" path="res://Scripts/Projectiles/Projectile.cs" id="1_dohqt"]
+[ext_resource type="Script" uid="uid://bltdppcccce10" path="res://Scripts/Projectiles/EnemyBaseProjectile.cs" id="1_dohqt"]
 [ext_resource type="Texture2D" uid="uid://hnajtwc73b0b" path="res://Graphs/Projectiles/coin-spread.png" id="2_3bu3g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mceqw"]

@@ -92,7 +92,11 @@ public partial class Player :CharacterBody2D
 			Experience -= ExperienceToNextLevel;
 			LevelUp();
 		}
-		GD.Print("Player Experience: " + Experience + "/" + ExperienceToNextLevel);
+		////GD.Print("Player Experience: " + Experience + "/" + ExperienceToNextLevel);
+		string expText = "EXP: " + Experience + "/" + ExperienceToNextLevel;
+		gameManager.ExperienceUpdateEvent?.Invoke(
+			expText
+		);	
 	}
 
 //This logis should be at StatsComponent
@@ -109,5 +113,6 @@ public partial class Player :CharacterBody2D
 		Stats.LevelUp(status);
 		ProjectileStats.LevelUp(Stats);
 		gameManager.GuiStatusUpdateEvent?.Invoke(Stats);
+		UpdateHealth();
 	}
 }

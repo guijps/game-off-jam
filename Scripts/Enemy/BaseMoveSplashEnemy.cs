@@ -8,6 +8,8 @@ public partial class BaseMoveSplashEnemy : Enemy
 
 	private float DistanceTreshold = 1f;
 	double attackPeriod = 5.0;
+	double walkPeriod = 3.0;
+	double startedWalkTime = 0.0;
 	double attackStartTime = 0.0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -56,15 +58,16 @@ public partial class BaseMoveSplashEnemy : Enemy
 
     private void UpdateMovementState()
     {
-        if(GlobalPosition.DistanceTo(targetPosition) > DistanceTreshold)
+		double now = Time.GetUnixTimeFromSystem();
+        if(GlobalPosition.DistanceTo(targetPosition) > DistanceTreshold && now < startedWalkTime + walkPeriod)
 			return;
         Velocity = Vector2.Zero;
 		SetAttackNextState();
-        
-    }
+			
+	}
 
-    private void UpdateAttackState()
-    {
+	private void UpdateAttackState()
+	{
 		double now = Time.GetUnixTimeFromSystem();
         Velocity = Vector2.Zero;
 		if (now >= attackStartTime + attackPeriod)
@@ -72,6 +75,7 @@ public partial class BaseMoveSplashEnemy : Enemy
 			SetMoveNextState();
         }
     }
+	
 	protected override void FireCommand()
     {
 		var now = Time.GetUnixTimeFromSystem();
@@ -86,6 +90,7 @@ public partial class BaseMoveSplashEnemy : Enemy
 
     private void SetMoveNextState()
     {
+		startedWalkTime = Time.GetUnixTimeFromSystem();
         targetPosition = new Vector2(Target.GlobalPosition.X, Target.GlobalPosition.Y);
 		NextState = EnemyState.Move;
     }

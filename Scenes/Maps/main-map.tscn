@@ -31,7 +31,6 @@ scale = Vector2(1.001374, 0.98446906)
 gameManager = NodePath("..")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(-160, 254)
 scale = Vector2(0.98669297, 0.9864528)
 navigation_polygon = SubResource("NavigationPolygon_hit2j")
 
@@ -99,7 +98,6 @@ texture = ExtResource("1_fqyld")
 
 [node name="Player" parent="NavigationRegion2D" node_paths=PackedStringArray("gameManager") instance=ExtResource("2_5olm8")]
 position = Vector2(520.9321, 66.90639)
-collision_layer = 1
 collision_mask = 10
 MoveSpeed = 200.0
 Experience = 100

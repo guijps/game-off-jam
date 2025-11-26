@@ -25,6 +25,7 @@ animations = [{
 scale = Vector2(0.7, 0.7)
 collision_layer = 2
 script = ExtResource("1_rrvqv")
+Damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964
