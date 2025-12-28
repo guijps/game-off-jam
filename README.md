@@ -11,7 +11,7 @@ You can either clone the repository and run the game using the **Godot Engine** 
 Challenge myself to build a complete game while balancing my personal schedule and my full-time job as a software developer, while gaining more hands-on development experience.
 
 ## Result
-I usually use **Unity** for game development, but for this project I decided to try **Godot**. The experience was surprisingly positive—Godot is much simpler and lighter compared to Unity, especially for 2D games. To create the art I used **Pixelorama**(Open Source), easy and lightweight pixel art multitool.
+I usually use **Unity** for game development, but for this project I decided to try **Godot**. The experience was surprisingly positive, Godot is much simpler and lighter compared to Unity, especially for 2D games. To create the art I used **Pixelorama**(Open Source), easy and lightweight pixel art multitool.
 
 However, there are some limitations when using **C#**. For example, I wanted to export the game to **WebGL** so I could host it on my GitHub site, but Godot only supports WebGL exports when using its own language (**GDScript**) instead of C#. Despite this, my overall experience with Godot was great, particularly for 2D development.
 
